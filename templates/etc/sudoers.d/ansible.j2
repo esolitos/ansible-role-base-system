@@ -1,0 +1,9 @@
+#
+# {{ ansible_managed }}
+#
+
+{% for i in bs_users %}
+{% if i.sudo is defined and i.sudo %}
+{{ i.name }} ALL=(ALL) NOPASSWD: ALL
+{% endif %}
+{% endfor %}

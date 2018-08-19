@@ -1,0 +1,22 @@
+# Role esolitos.base_system
+---
+
+bs_groups: []
+# - name: my_group
+#   system: yes (optional, default: no)
+#   state: absent (optional, default: present)
+
+bs_users: []
+# User properties passed 1:1 to user module.
+# @ref: https://docs.ansible.com/ansible/latest/modules/user_module.html
+# Additions, all optional:
+#  - clear_password: string
+#  - ssh_keys: list
+#  - sudo: bool
+
+bs_alpine_release: "v3.8"
+bs_alpine_community_repository: no
+
+bs_pkg_banned: []
+bs_pkg_required: []
+bs_run_pkg_upgrades: no

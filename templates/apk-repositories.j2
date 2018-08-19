@@ -1,0 +1,9 @@
+{{ ansible_managed }}
+
+# Main repository
+https://ftp.halifax.rwth-aachen.de/alpine/{{ bs_alpine_release | mandatory }}/main
+
+{% if bs_alpine_community_repository is defined and bs_alpine_community_repository == true %}
+# Community repository
+https://ftp.halifax.rwth-aachen.de/alpine/{{ bs_alpine_release | mandatory }}/community
+{% endif %}

@@ -1,0 +1,6 @@
+// ------------------
+// {{ ansible_managed }}
+// ------------------
+
+APT::Install-Recommends "{{ bs_apt_install_recommends | default(0) }}";
+APT::Install-Suggests "{{ bs_apt_install_suggests | default(0) }}";

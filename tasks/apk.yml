@@ -1,0 +1,37 @@
+# Alpine specific tasks esolitos.base_system
+---
+
+# TODO 
+
+- name: [apk] Configure repositories
+  template:
+    src: apk-repositories.j2
+    dest: /etc/apk/repositories
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+
+- name: [apk] Update packages cache
+  package:
+    update_cache: yes
+
+- name: [apk] Remove packages
+  apk:
+    name: "{{ bs_pkg_banned | join(',') }}"
+    state: absent
+    update_cache: no
+  when: bs_pkg_banned is defined
+
+- name: [apk] Upgrade all packages
+  apk:
+    available: yes
+    upgrade: yes
+    update_cache: no
+  when: bs_run_pkg_upgrades is defined and bs_run_pkg_upgrades == true
+
+- name: [apk] Install packages
+  package:
+    name: "{{ bs_pkg_required | join(',') }}"
+    state: present
+    update_cache: no

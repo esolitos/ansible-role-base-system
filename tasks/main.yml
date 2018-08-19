@@ -1,0 +1,29 @@
+# Role esolitos.base_system
+---
+
+- name: (Alpine) Include Vars
+  include_vars: "alpine.yml"
+  when: ansible_distribution == 'Alpine'
+
+- name: (Devuan) Include Vars
+  include_vars: "devuan.yml"
+  when: ansible_distribution == 'Devuan GNU/Linux'
+
+- name: (Debian) Include Vars
+  include_vars: "debian.yml"
+  when: ansible_distribution == 'Debian'
+
+- name: [INCLUDE] Prepare tasks
+  include: prepare.yml
+
+- name: [INCLUDE] Manage users and groups
+  include: user.yml
+
+- name: [INCLUDE] Manage APT
+  include: apt.yml
+  when: ansible_pkg_mgr == 'apt'
+
+# TODO
+# - name: [INCLUDE] Manage APK
+#   include: apk.yml
+#   when: ansible_pkg_mgr == 'apk'
