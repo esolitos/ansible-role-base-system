@@ -1,0 +1,13 @@
+---
+
+- name: [LOCALE] Add localization
+  locale_gen:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ bs_locales }}"
+  notify: generate localization
+
+- name: [TEMPLATE] Deploy default locale
+  template:
+    src: etc/default/locale.j2
+    dest: /etc/default/locale

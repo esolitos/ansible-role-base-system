@@ -1,0 +1,30 @@
+---
+
+- name: [ALTERNATIVES] Set editor
+  alternatives:
+    name: editor
+    path: "{{ bs_alternative_editor }}"
+
+- name: [ALTERNATIVES] Set awk
+  alternatives:
+    name: awk
+    path: "{{ bs_alternative_awk }}"
+
+- name: [COPY] root dotfiles
+  copy:
+    src: "{{ item }}"
+    dest: "/root/.{{ item }}"
+  with_items:
+    - "bashrc"
+    - "vimrc"
+    - "gitconfig"
+  when: bs_use_dotfiles
+
+- name: [SYSCTL] Tuning
+  sysctl:
+    name: "{{ item.key }}"
+    value: "{{ item.value }}"
+    sysctl_file: /etc/sysctl.d/ansible.conf
+    state: present
+  with_dict: "{{ bs_sysctl_config }}"
+  when: not bs_is_docker

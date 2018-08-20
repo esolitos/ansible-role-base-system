@@ -1,2 +1,5 @@
-# Role esolitos.base_system 
+# Handlers for esolitos.base_system
 ---
+
+- name: generate localization
+  command: locale-gen

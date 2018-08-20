@@ -27,3 +27,9 @@
 # - name: [INCLUDE] Manage APK
 #   include: apk.yml
 #   when: ansible_pkg_mgr == 'apk'
+
+- name: [INCLUDE] Localzation
+  include: locale.yml
+
+- name: [INCLUDE] System configuration
+  include: system.yml
